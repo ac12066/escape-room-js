@@ -1,0 +1,95 @@
+{
+  "proyecto": "Escape Room JavaScript",
+  "titulo": "La Camara de los Cinco Desafios",
+  "descripcion": "Juego interactivo que utiliza HTML5, CSS3 y JavaScript puro para resolver 5 desafios progresivos",
+  "niveles": {
+    "nivel1": {
+      "nombre": "El Guardian de la Ubicacion",
+      "descripcion": "Obtener ubicacion actual del dispositivo",
+      "requisitos": [
+        "Usar Geolocation API",
+        "Validar permisos",
+        "Mostrar latitud y longitud"
+      ],
+      "porcentaje": 15
+    },
+    "nivel2": {
+      "nombre": "El Cartografo Perdido",
+      "descripcion": "Dibujar un mapa simplificado en Canvas",
+      "requisitos": [
+        "Canvas API nativa",
+        "Dibujar grilla, rectangulos y circulos",
+        "Marcar posicion del nivel 1"
+      ],
+      "porcentaje": 15
+    },
+    "nivel3": {
+      "nombre": "La Evidencia del Explorador",
+      "descripcion": "Capturar foto usando la camara",
+      "requisitos": [
+        "MediaDevices API",
+        "Obtener stream de video",
+        "Capturar foto",
+        "Guardar en localStorage"
+      ],
+      "porcentaje": 20
+    },
+    "nivel4": {
+      "nombre": "El Nucleo de Procesamiento",
+      "descripcion": "Procesar 20,000 registros con Web Worker",
+      "requisitos": [
+        "Generar 20,000 datos",
+        "Usar Web Worker",
+        "Calcular promedios, maximos, minimos",
+        "Mantener interfaz responsiva"
+      ],
+      "porcentaje": 25
+    },
+    "nivel5": {
+      "nombre": "El Portal Cuantico",
+      "descripcion": "Procesar 250,000 registros cuanticos",
+      "requisitos": [
+        "Generar 250,000 registros",
+        "Enviar al Worker",
+        "Filtrar valores negativos",
+        "Calcular top 10 temperaturas y presiones",
+        "Exportar JSON"
+      ],
+      "porcentaje": 25
+    }
+  },
+  "tecnologias": {
+    "frontend": [
+      "HTML5",
+      "CSS3",
+      "JavaScript ES6+"
+    ],
+    "apis": [
+      "Geolocation API",
+      "Canvas API",
+      "MediaDevices API",
+      "Web Workers",
+      "localStorage",
+      "JSON"
+    ],
+    "libreriasCss": [
+      "Bootstrap 5.3"
+    ],
+    "restricciones": "Sin frameworks JS externos, sin librerias externas, solo HTML5/CSS3/JS puro"
+  },
+  "arquitectura": {
+    "app.js": "Orquestacion principal del flujo",
+    "utilidades.js": "Funciones reutilizables",
+    "validaciones.js": "Validaciones de datos",
+    "nivelX.js": "Logica de cada nivel",
+    "ui-nivelX.js": "Renderizado y eventos de UI",
+    "worker-nivelX.js": "Procesamiento en segundo plano"
+  },
+  "modularizacion": {
+    "separacionPorNivel": true,
+    "uiSeparadaDelogica": true,
+    "workersParaProcesamiento": true,
+    "noConsolesLog": true,
+    "noCodigoMuerto": true
+  }
+}

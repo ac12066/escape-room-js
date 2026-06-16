@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room JavaScript - La Camara de los Cinco Desafios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body class="bg-dark text-white">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <!-- Encabezado -->
+        <header class="py-4 border-bottom border-secondary position-relative">
+            <button id="btnReinicioGlobal" class="btn btn-outline-warning btn-sm position-absolute top-0 end-0 m-3" title="Reiniciar el juego">Reiniciar</button>
+            <div class="container">
+                <h1 class="text-center mb-2">Escape Room JavaScript</h1>
+                <h2 class="text-center h4 text-info">La Camara de los Cinco Desafios</h2>
+                <div id="indicadorProgreso" class="progress mt-4" style="height: 25px;">
+                    <div id="barraProgreso" class="progress-bar bg-success" role="progressbar" style="width: 0%">
+                        0%
+                    </div>
+                </div>
+                <p id="textoNivel" class="text-center mt-3 text-light">Selecciona un nivel para comenzar</p>
+            </div>
+        </header>
+
+        <!-- Contenedor principal -->
+        <main class="flex-grow-1 py-4">
+            <div class="container">
+                <!-- Navegacion de niveles -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="btn-group w-100" role="group">
+                            <button type="button" id="btnNivel1" class="btn btn-outline-primary btn-nivel">Nivel 1</button>
+                            <button type="button" id="btnNivel2" class="btn btn-outline-secondary btn-nivel" disabled>Nivel 2</button>
+                            <button type="button" id="btnNivel3" class="btn btn-outline-success btn-nivel" disabled>Nivel 3</button>
+                            <button type="button" id="btnNivel4" class="btn btn-outline-warning btn-nivel" disabled>Nivel 4</button>
+                            <button type="button" id="btnNivel5" class="btn btn-outline-danger btn-nivel" disabled>Nivel 5</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nivel 1: El Guardian de la Ubicacion -->
+                <section id="seccionNivel1" class="nivel-seccion" style="display: none;">
+                    <h3 class="text-info mb-4">Nivel 1 - El Guardian de la Ubicacion</h3>
+                    <p class="text-light mb-3">Obtén tu ubicación actual para acceder al siguiente desafío</p>
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card bg-secondary border-info mb-3">
+                                <div class="card-body">
+                                    <button id="btnObtenerUbicacion" class="btn btn-primary btn-lg w-100">Obtener Ubicacion</button>
+                                </div>
+                            </div>
+                            <div id="resultadoNivel1"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Nivel 2: El Cartografo Perdido -->
+                <section id="seccionNivel2" class="nivel-seccion" style="display: none;">
+                    <h3 class="text-info mb-4">Nivel 2 - El Cartografo Perdido</h3>
+                    <p class="text-light mb-3">Dibuja el mapa con tu ubicación</p>
+                    <div class="row">
+                        <div class="col-md-10 mx-auto">
+                            <div class="card bg-secondary border-info">
+                                <div class="card-body">
+                                    <canvas id="canvasMapa" width="600" height="400" class="border border-light w-100"></canvas>
+                                    <button id="btnDibujarMapa" class="btn btn-primary w-100 mt-3">Dibujar Mapa</button>
+                                </div>
+                            </div>
+                            <div id="resultadoNivel2" class="mt-3"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Nivel 3: La Evidencia del Explorador -->
+                <section id="seccionNivel3" class="nivel-seccion" style="display: none;">
+                    <h3 class="text-info mb-4">Nivel 3 - La Evidencia del Explorador</h3>
+                    <p class="text-light mb-3">Captura una foto con tu cámara</p>
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card bg-secondary border-info mb-3">
+                                <div class="card-body">
+                                    <video id="videoCaptura" width="100%" height="300" autoplay playsinline class="border border-light mb-3" style="display: none;"></video>
+                                    <div id="contenedorFoto"></div>
+                                    <button id="btnIniciarCamara" class="btn btn-primary w-100 mb-2">Iniciar Camara</button>
+                                    <button id="btnCapturarFoto" class="btn btn-success w-100" style="display: none;">Capturar Foto</button>
+                                </div>
+                            </div>
+                            <div id="resultadoNivel3" class="mt-3"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Nivel 4: El Nucleo de Procesamiento -->
+                <section id="seccionNivel4" class="nivel-seccion" style="display: none;">
+                    <h3 class="text-info mb-4">Nivel 4 - El Nucleo de Procesamiento</h3>
+                    <p class="text-light mb-3">Procesa 20,000 registros de datos</p>
+                    <div class="row">
+                        <div class="col-md-10 mx-auto">
+                            <button id="btnProcesarNivel4" class="btn btn-primary btn-lg w-100 mb-3">Iniciar Procesamiento</button>
+                            <div id="barraProcesoNivel4" class="progress mb-3" style="display: none; height: 25px;">
+                                <div id="progresoBarra4" class="progress-bar bg-warning" role="progressbar" style="width: 0%">
+                                    0%
+                                </div>
+                            </div>
+                            <div id="resultadoNivel4"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Nivel 5: El Portal Cuantico -->
+                <section id="seccionNivel5" class="nivel-seccion" style="display: none;">
+                    <h3 class="text-info mb-4">Nivel 5 - El Portal Cuantico</h3>
+                    <p class="text-light mb-3">Procesa 250,000 registros cuanticos</p>
+                    <div class="row">
+                        <div class="col-md-10 mx-auto">
+                            <button id="btnProcesarNivel5" class="btn btn-danger btn-lg w-100 mb-3">Iniciar Portal Cuantico</button>
+                            <div id="barraProcesoNivel5" class="progress mb-3" style="display: none; height: 25px;">
+                                <div id="progresoBarra5" class="progress-bar bg-danger" role="progressbar" style="width: 0%">
+                                    0%
+                                </div>
+                            </div>
+                            <div id="resultadoNivel5"></div>
+                            <div id="botonesContinuarNivel5" class="mt-4" style="display: none;">
+                                <button id="btnContinuarACompletacion" class="btn btn-success btn-lg w-100">Completar Juego</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pantalla de completacion -->
+                <section id="seccionCompletado" class="nivel-seccion" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto text-center">
+                            <div class="alert alert-success border-success" role="alert">
+                                <h2 class="text-light mb-3">Felicitaciones!</h2>
+                                <p class="text-light mb-3">Has completado todos los desafios de la Camara de los Cinco Desafios</p>
+                                <div id="botonesFinal" class="mt-4">
+                                    <button id="btnExportarJSON" class="btn btn-success btn-lg">Exportar Resultados</button>
+                                    <button id="btnReiniciar" class="btn btn-primary btn-lg ms-2">Reiniciar Juego</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Pie de pagina -->
+        <footer class="py-4 border-top border-secondary text-center text-light">
+            <p>&copy; 2024 Escape Room JavaScript. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/utilidades.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script src="js/nivel1/nivel1.js"></script>
+    <script src="js/nivel1/ui-nivel1.js"></script>
+    <script src="js/nivel2/nivel2.js"></script>
+    <script src="js/nivel2/mapa.js"></script>
+    <script src="js/nivel3/nivel3.js"></script>
+    <script src="js/nivel3/captura.js"></script>
+    <script src="js/nivel3/ui-nivel3.js"></script>
+    <script src="js/nivel4/nivel4.js"></script>
+    <script src="js/nivel4/ui-nivel4.js"></script>
+    <script src="js/nivel5/nivel5.js"></script>
+    <script src="js/nivel5/ui-nivel5.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
