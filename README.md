@@ -3,7 +3,7 @@
 
 ##  Integrantes del Equipo
 
-| Nombre | Usuario GitHub |
+| Nombre | Carné |
 |--------|---------------|
 | Daniel Enrique Gómez Alonso | GA22038 |
 | José Alfredo Hernández Hernández | HH22038 |
